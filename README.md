@@ -1,112 +1,101 @@
-# Simple-SR
-The repository includes MuCAN, LAPAR, Beby-GAN and etc. It is designed for simple training and evaluation.
+#### EDVR has been merged into [BasicSR](https://github.com/xinntao/BasicSR). This GitHub repo is a mirror of [BasicSR](https://github.com/xinntao/BasicSR). Recommend to use [BasicSR](https://github.com/xinntao/BasicSR), and open issues, pull requests, etc in [BasicSR](https://github.com/xinntao/BasicSR).
+Note that this version is not compatible with previous versions. If you want to use previous ones, please refer to the `old_version` branch.
 
 ---
-### Update
-The training code of LAPAR (9 models) is now released.
 
----
-### Paper 
+# :rocket: [BasicSR](https://github.com/xinntao/BasicSR)
 
-#### Best-Buddy GANs for Highly Detailed Image Super-Resolution
-[\[High quality version\]](https://drive.google.com/file/d/14vt57mSERR8cx62e7aNCkuxlKOCUP53H/view?usp=sharing)  [\[arXiv\]](https://arxiv.org/abs/2103.15295)
+[GitHub](https://github.com/xinntao/BasicSR) | [Gitee码云](https://gitee.com/xinntao/BasicSR) <br>
+[English](README.md) | [简体中文](README_CN.md)
 
-#### MuCAN: Multi-Correspondence Aggregation Network for Video Super-Resolution (ECCV 2020)
-[\[ECCV\]](https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123550341.pdf)   [\[arXiv\]](https://arxiv.org/abs/2007.1180)
+BasicSR is an **open source** image and video super-resolution toolbox based on PyTorch (will extend to more restoration tasks in the future).<br>
+<sub>([ESRGAN](https://github.com/xinntao/ESRGAN), [EDVR](https://github.com/xinntao/EDVR), [DNI](https://github.com/xinntao/DNI), [SFTGAN](https://github.com/xinntao/SFTGAN))</sub>
 
-#### LAPAR: Linearly-Assembled Pixel-Adaptive Regression Network for Single Image Super-resolution and Beyond (NeurIPS 2020)
-[\[NeurIPS\]](https://papers.nips.cc/paper/2020/file/eaae339c4d89fc102edd9dbdb6a28915-Paper.pdf)
+## :sparkles: New Feature
 
-Please find supplementary files of MuCAN and LAPAR [here](https://drive.google.com/drive/folders/1pSFX6kV81slv2vGkboZjewZwQsLkFesU).
+- Sep 8, 2020. Add **blind face restoration inference codes: [DFDNet](https://github.com/csxmli2016/DFDNet)**. Note that it is slightly different from the official testing codes.
+   > Blind Face Restoration via Deep Multi-scale Component Dictionaries <br>
+   > Xiaoming Li, Chaofeng Chen, Shangchen Zhou, Xianhui Lin, Wangmeng Zuo and Lei Zhang <br>
+   > European Conference on Computer Vision (ECCV), 2020
+- Aug 27, 2020. Add **StyleGAN2 training and testing** codes: [StyleGAN2](https://github.com/rosinality/stylegan2-pytorch).
+   > Analyzing and Improving the Image Quality of StyleGAN <br>
+   > Tero Karras, Samuli Laine, Miika Aittala, Janne Hellsten, Jaakko Lehtinen and Timo Aila <br>
+   > Computer Vision and Pattern Recognition (CVPR), 2020
 
----
-### Usage
+<details>
+  <summary>More</summary>
+<ul>
+  <li>Aug 19, 2020. A brand-new BasicSR v1.0.0 online.</li>
+</ul>
+</details>
 
-1. Clone the repository
-    ```shell
-    git clone https://github.com/Jia-Research-Lab/Simple-SR.git
-    ```
-2. Install the dependencies
-    - Python >= 3.5
-    - PyTorch >= 1.2
-    - spatial-correlation-sampler
-    ```shell
-    pip install spatial-correlation-sampler
-    ```
-    - Other packages
-    ```shell
-    pip install -r requirements.txt
-    ```
+## :zap: HOWTOs
 
-3. Download pretrained models from [Google Drive](https://drive.google.com/drive/folders/1c-KUEPJl7pHs9btqHYoUJkcMPKViObgJ?usp=sharing). We re-trained the LAPAR models and their results are slightly different from the ones reported in paper.
-    - MuCAN
-        - MuCAN\_REDS.pth: trained on REDS dataset, 5-frame input, x4 scale
-        - MuCAN\_Vimeo90K.pth: trained on Vimeo90K dataset, 7-frame input, x4 scale
-    - LAPAR: trained on DIV2K+Flickr2K datasets
-        |    Scale x2    |    Scale x3    |    Scale x4    |
-        |     :----:     |     :----:     |     :----:     |
-        | LAPAR_A_x2.pth | LAPAR_A_x3.pth | LAPAR_A_x4.pth |
-        | LAPAR_B_x2.pth | LAPAR_B_x3.pth | LAPAR_B_x4.pth |
-        | LAPAR_C_x2.pth | LAPAR_C_x3.pth | LAPAR_C_x4.pth |
+We provides simple pipelines to train/test/inference models for quick start.
+These pipelines/commands cannot cover all the cases and more details are in the following sections.
 
-4. Quick test
-    ```shell
-    python3 test_sample.py --sr_type SISR/VSR --model_path /model/path --input_path ./demo/LR_imgs --output_path ./demo/output --gt_path ./demo/HR_imgs
-    ```
+- :zap: [How to train StyleGAN2](docs/HOWTOs.md#How-to-train-StyleGAN2)
+- :zap: [How to test StyleGAN2](docs/HOWTOs.md#How-to-test-StyleGAN2)
+- :zap: [How to test DFDNet](docs/HOWTOs.md#How-to-test-DFDNet)
 
-#### Prepare Data
-1. Training Datasets
+## Dependencies and Installation
 
-    Download [DIV2K](https://data.vision.ee.ethz.ch/cvl/DIV2K/) and [Flickr2K](https://cv.snu.ac.kr/research/EDSR/Flickr2K.tar). You may crop the HR and LR images to sub-images for fast reading referring to .utils/data\_prep/extract\_subimage.py. 
+- Python >= 3.7 (Recommend to use [Anaconda](https://www.anaconda.com/download/#linux) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html))
+- [PyTorch >= 1.3](https://pytorch.org/)
+- NVIDIA GPU + [CUDA](https://developer.nvidia.com/cuda-downloads)
 
-2. Evaluation Datasets
+Please run the following commands in the **BasicSR root path** to install BasicSR:<br>
+(Make sure that your GCC version: gcc >= 5)
 
-    Download Set5, Set14, Urban100, BSDS100 and Manga109 from [Google Drive](https://drive.google.com/drive/folders/1B3DJGQKB6eNdwuQIhdskA64qUuVKLZ9u) uploaded by BasicSR.
+```bash
+pip install -r requirements.txt
+python setup.py develop
+```
 
-3. Update the dataset location in .dataset/\_\_init\_\_.py. 
+Note that BasicSR is only tested in Ubuntu, and may be not suitable for Windows. You may try [Windows WSL with CUDA supports](https://docs.microsoft.com/en-us/windows/win32/direct3d12/gpu-cuda-in-wsl) :-) (It is now only available for insider build with Fast ring).
 
-4. (Optional) You can convert images to lmdb files for fast loading referring to [BasicSR](https://github.com/xinntao/BasicSR/blob/master/docs/DatasetPreparation.md#LMDB-Description). And you need to modify the data reading logics in .dataset/\*dataset.py accordingly.
+## TODO List
 
-#### Train
-1. Create a log folder as
-    ```shell
-    mkdir logs
-    ```
+Please see [project boards](https://github.com/xinntao/BasicSR/projects).
 
-2. Create a new experiment folder in .exps/. You just need to prepare the config.py and network.py, while the train.py and validate.py are universal. For example, for LAPAR\_A\_x2, run
-    ```shell
-    cd exps/LAPAR_A_x2/
-    bash train.sh $GPU_NUM $PORT
-    ```
-    Notice that you can find the checkpoints, log files and visualization images in either .exps/LAPAR\_A\_x2/log/ (a soft link) or .logs/LAPAR\_A\_x2/.
+## Dataset Preparation
 
-#### Test
-Please refer to validate.py in each experiment folder or quick test above.
+- Please refer to **[DatasetPreparation.md](docs/DatasetPreparation.md)** for more details.
+- The descriptions of currently supported datasets (`torch.utils.data.Dataset` classes) are in [Datasets.md](docs/Datasets.md).
 
----
-### Acknowledgement
-We refer to [BasicSR](https://github.com/xinntao/BasicSR) for some details.
+## Train and Test
 
----
-### Bibtex
-    @inproceedings{li2020mucan,
-      title={MuCAN: Multi-correspondence Aggregation Network for Video Super-Resolution},
-      author={Li, Wenbo and Tao, Xin and Guo, Taian and Qi, Lu and Lu, Jiangbo and Jia, Jiaya},
-      booktitle={European Conference on Computer Vision},
-      pages={335--351},
-      year={2020},
-      organization={Springer}
-    }
-    @article{li2020lapar,
-      title={LAPAR: Linearly-Assembled Pixel-Adaptive Regression Network for Single Image Super-resolution and Beyond},
-      author={Li, Wenbo and Zhou, Kun and Qi, Lu and Jiang, Nianjuan and Lu, Jiangbo and Jia, Jiaya},
-      journal={Advances in Neural Information Processing Systems},
-      volume={33},
-      year={2020}
-    }
-    @article{li2021best,
-      title={Best-Buddy GANs for Highly Detailed Image Super-Resolution},
-      author={Li, Wenbo and Zhou, Kun and Qi, Lu and Lu, Liying and Jiang, Nianjuan and Lu, Jiangbo and Jia, Jiaya},
-      journal={arXiv preprint arXiv:2103.15295},
-      year={2021}
-    }
+- **Training and testing commands**: Please see **[TrainTest.md](docs/TrainTest.md)** for the basic usage.
+- **Options/Configs**: Please refer to [Config.md](docs/Config.md).
+- **Logging**: Please refer to [Logging.md](docs/Logging.md).
+
+## Model Zoo and Baselines
+
+**[Download official pre-trained models](https://drive.google.com/drive/folders/15DgDtfaLASQ3iAPJEVHQF49g9msexECG?usp=sharing)**<br>
+**[Download reproduced models and logs](https://drive.google.com/drive/folders/1XN4WXKJ53KQ0Cu0Yv-uCt8DZWq6uufaP?usp=sharing)**
+
+- The descriptions of currently supported models are in [Models.md](docs/Models.md).
+- **Pre-trained models and log examples** are available in **[ModelZoo.md](docs/ModelZoo.md)**.
+- We also provide **training curves** in [wandb](https://app.wandb.ai/xintao/basicsr):
+
+<p align="center">
+<a href="https://app.wandb.ai/xintao/basicsr" target="_blank">
+   <img src="./assets/wandb.jpg" height="280">
+</a></p>
+
+## Codebase Designs and Conventions
+
+Please see [DesignConvention.md](docs/DesignConvention.md) for the designs and conventions of the BasicSR codebase.<br>
+The figure below shows the overall framework. More descriptions for each component: <br>
+**[Datasets.md](docs/Datasets.md)**&emsp;|&emsp;**[Models.md](docs/Models.md)**&emsp;|&emsp;**[Config.md](Config.md)**&emsp;|&emsp;**[Logging.md](docs/Logging.md)**
+
+![overall_structure](./assets/overall_structure.png)
+
+## License and Acknowledgement
+
+This project is released under the Apache 2.0 license.
+More details about license and acknowledgement are in [LICENSE](LICENSE/README.md).
+
+## Contact
+
+If you have any question, please email `xintao.wang@outlook.com`.

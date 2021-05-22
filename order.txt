@@ -1,0 +1,39 @@
+python basicsr/test.py -opt options/test/EDVR/test_EDVR_M_x4_SR_REDS.yml
+python basicsr/test.py -opt options/test/EDVR/test_pretrain.yml
+
+EDVR_M_x4_SR_REDS_official-32075921
+python basicsr/test.py -opt options/test/EDVR/test_L.yml
+
+CUDA_VISIBLE_DEVICES=2,3 python basicsr/train.py -opt options/train/EDVR/train_L_7.yml
+
+CUDA_VISIBLE_DEVICES=2 python basicsr/train.py -opt options/train/EDVR/train_L_YTB2.yml
+
+
+##vis
+CUDA_VISIBLE_DEVICES = 1 python basicsr/test.py -opt options/test/EDVR/test_L-vis.yml
+
+##可视化训练模型结果
+CUDA_VISIBLE_DEVICES=2 python basicsr/test.py -opt options/test/EDVR/test_train_vis.yml
+
+
+#测试训练模型，partial
+CUDA_VISIBLE_DEVICES=3 python basicsr/test.py -opt options/test/EDVR/test_P_train.yml
+
+#测试pretrain模型 partial
+CUDA_VISIBLE_DEVICES=3 python basicsr/test.py -opt options/test/EDVR/test_P_pretrain.yml
+
+
+
+#YTB2 train
+CUDA_VISIBLE_DEVICES=2 python basicsr/train.py -opt options/train/EDVR/train_L_YTB2.yml
+
+#YTB2 test pretrain
+CUDA_VISIBLE_DEVICES=2 python basicsr/test.py -opt options/test/EDVR/test_pretrain_YTB2.yml   
+
+#YTB2 vis
+CUDA_VISIBLE_DEVICES=3 python basicsr/test.py -opt options/test/EDVR/YTB2-vis.yml  
+
+#YTB2 train vis
+CUDA_VISIBLE_DEVICES=3 python basicsr/test.py -opt options/test/EDVR/YTB2-vis-train.yml 
+
+CUDA_VISIBLE_DEVICES=0 python basicsr/test.py -opt options/test/EDVR/test_3d.yml 
