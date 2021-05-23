@@ -16,8 +16,8 @@ datasets:
     # meta_info_file: basicsr/data/meta_info/meta_info_REDS_GT.txt
     name: VOX
     type: Vimeo90KDataset
-    dataroot_gt: /data2/wei/vox-unalign/GT
-    dataroot_lq: /data2/wei/vox-unalign/LR
+    dataroot_gt: /data/gy/vox-unalign/GT
+    dataroot_lq: /data/gy/vox-unalign/LR
     dataroot_flow: ~
     meta_info_file: basicsr/data/meta_info/unalign_vox_train.txt
     val_partition: Vimeo90KDateset  # set to 'official' when use the official validation partition
@@ -33,8 +33,8 @@ datasets:
 
     # data loader
     use_shuffle: true
-    num_worker_per_gpu: 4
-    batch_size_per_gpu: 4
+    num_worker_per_gpu: 16
+    batch_size_per_gpu: 16
     dataset_enlarge_ratio: 1
     prefetch_mode: ~
 
@@ -46,8 +46,8 @@ datasets:
     # meta_info_file: basicsr/data/meta_info/meta_info_REDS4_test_GT.txt
     name: VOX
     type: VideoTestVimeo90KDataset
-    dataroot_gt: /data2/wei/vox-unalign/GT
-    dataroot_lq: /data2/wei/vox-unalign/LR
+    dataroot_gt: /data/gy/vox-unalign/GT
+    dataroot_lq: /data/gy/vox-unalign/LR
     meta_info_file: basicsr/data/meta_info/unalign_vox_test.txt
     # change to 'meta_info_REDSofficial4_test_GT' when use the official validation partition
     io_backend:
@@ -94,7 +94,7 @@ train:
 
 # validation settings
 val:
-  val_freq: !!float 5e3
+  val_freq: !!float 3e5
   save_img: false
 
   metrics:

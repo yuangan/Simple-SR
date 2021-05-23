@@ -1,0 +1,8 @@
+# ninja log v5
+1	14529	1621772321122154791	/data/gy/Simple-SR/build/temp.linux-x86_64-3.8/basicsr/models/ops/dcn/src/deform_conv_cuda_kernel.o	f03e07034b801ef3
+1	18448	1621772325042496855	/data/gy/Simple-SR/build/temp.linux-x86_64-3.8/basicsr/models/ops/dcn/src/deform_conv_cuda.o	87aa642b53f3bdf8
+0	19006	1621772325594545023	/data/gy/Simple-SR/build/temp.linux-x86_64-3.8/basicsr/models/ops/dcn/src/deform_conv_ext.o	591f12fcca6b8f17
+1	16097	1621772342195993556	/data/gy/Simple-SR/build/temp.linux-x86_64-3.8/basicsr/models/ops/fused_act/src/fused_bias_act_kernel.o	1fcea629918b7f35
+1	16133	1621772342231996698	/data/gy/Simple-SR/build/temp.linux-x86_64-3.8/basicsr/models/ops/fused_act/src/fused_bias_act.o	32cf9c9241d05e31
+0	18917	1621772361485676631	/data/gy/Simple-SR/build/temp.linux-x86_64-3.8/basicsr/models/ops/upfirdn2d/src/upfirdn2d.o	884fe6f6cfa67736
+1	19309	1621772361877710837	/data/gy/Simple-SR/build/temp.linux-x86_64-3.8/basicsr/models/ops/upfirdn2d/src/upfirdn2d_kernel.o	158218559e806540
