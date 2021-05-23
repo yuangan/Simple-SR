@@ -14,3 +14,5 @@ basicsr/models/ops/fused_act/src/fused_bias_act.cpp
 basicsr/models/ops/fused_act/src/fused_bias_act_kernel.cu
 basicsr/models/ops/upfirdn2d/src/upfirdn2d.cpp
 basicsr/models/ops/upfirdn2d/src/upfirdn2d_kernel.cu
+dataset/__init__.py
+dataset/mix_dataset.py

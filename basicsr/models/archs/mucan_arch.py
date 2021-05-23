@@ -10,8 +10,8 @@ import torch.nn.functional as F
 from torch.utils.checkpoint import checkpoint
 from spatial_correlation_sampler import SpatialCorrelationSampler as Correlation
 
-from utils.modules.module_util import ResidualBlock_noBN_noAct, make_layer
-from utils.loss import CharbonnierLoss
+from basicsr.models.archs.mucan_util import ResidualBlock_noBN_noAct, make_layer
+# from utils.loss import CharbonnierLoss
 
 from easydict import EasyDict as edict
 import numpy as np
@@ -413,7 +413,7 @@ class TMCAM(nn.Module):
 
 
 class MUCAN(nn.Module):
-    def __init__(self, config):
+    def __init__(self, config=config, num_in_ch=3):
         super(MUCAN, self).__init__()
 
         in_chl = config.MODEL.IN_CHANNEL
@@ -450,7 +450,7 @@ class MUCAN(nn.Module):
 
         self.lrelu = nn.LeakyReLU(negative_slope=0.1, inplace=True)
 
-        self.criterion = CharbonnierLoss(mode='mean')
+        # self.criterion = CharbonnierLoss(mode='mean')
 
     def forward(self, x, gt=None):
         B, N, C, H, W = x.size()
